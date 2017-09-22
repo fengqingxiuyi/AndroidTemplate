@@ -1,1 +1,1 @@
-include ':androidtemplatetest'
+include ':app'
