@@ -5,7 +5,7 @@ Android模板创建Demo及使用示例，基于公司类MVP开发模式创建，
 # MVPActivity和MVPFragment存放位置
 
 - Mac：/Applications/Android Studio.app/Contents/plugins/android/lib/templates/activities
-- Windows：不清楚，请参考Mac存放位置
+- Windows：AndroidStudio安装目录\plugins\android\lib\templates\activities
 
 # 使用演示
 
