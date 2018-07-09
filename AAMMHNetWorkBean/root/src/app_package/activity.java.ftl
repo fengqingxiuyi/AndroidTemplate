@@ -19,7 +19,7 @@ import ${packageName}.request.contract.${contractClass};
 import ${packageName}.request.presenter.${presenterClass};
 
 /**
- * 账单详情
+ * Activity
  */
 public class ${activityClass} extends MMHBaseActivity implements ${contractClass}.View {
 
@@ -33,8 +33,13 @@ public class ${activityClass} extends MMHBaseActivity implements ${contractClass
     @Override
     protected void initView() {
         setContentView(R.layout.${layoutName});
+        initTitleBar();
         //findView
 
+    }
+
+    private void initTitleBar() {
+        initTitleBar("页面标题", Constant.DEFAULT_LEFT_BACK, null);
     }
 
     @Override
