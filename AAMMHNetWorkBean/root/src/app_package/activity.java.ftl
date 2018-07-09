@@ -2,19 +2,13 @@ package ${packageName};
 
 import android.text.TextUtils;
 
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.mamahao.third_library.pulltoreshresh.library.PullToRefreshBase;
-import com.mamahao.third_library.pulltoreshresh.widget.PullToRefreshXRecycleView;
 import com.mmh.base_library.base.activity.MMHBaseActivity;
 import com.mmh.base_library.network.exception.ErrorBean;
 import com.mmh.base_library.utils.MyToast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import cn.atmobi.base_module.constant.Constant;
 import cn.atmobi.base_module.utils.ProgressBarUtils;
 import cn.atmobi.base_module.widget.error.OnTipViewClickListener;
 import cn.atmobi.base_module.widget.error.TipViewManager;
@@ -25,34 +19,22 @@ import ${packageName}.request.contract.${contractClass};
 import ${packageName}.request.presenter.${presenterClass};
 
 /**
- * Activity
+ * 账单详情
  */
 public class ${activityClass} extends MMHBaseActivity implements ${contractClass}.View {
 
     //presenter
     ${contractClass}.Presenter presenter;
     //findView
-    private PullToRefreshXRecycleView pullRecycleView;
-    private XRecyclerView mRecyclerView;
+    
     //error page
     TipViewManager tipViewManager;
-    //adapter
-    private ${adapterClass} mAdapter;
-    //page
-    int page = 1;
-    //data source
-    List<${beanClass}> dataList;
 
     @Override
     protected void initView() {
         setContentView(R.layout.${layoutName});
-        initTitleBar();
         //findView
-        pullRecycleView = (PullToRefreshXRecycleView) findViewById(R.id.pull_recycler_view);
-    }
 
-    private void initTitleBar() {
-        initTitleBar("页面标题", Constant.DEFAULT_LEFT_BACK, null);
     }
 
     @Override
@@ -60,8 +42,7 @@ public class ${activityClass} extends MMHBaseActivity implements ${contractClass
         new ${presenterClass}().bind(this, this);
         //
         initTipViewManager();
-        initRecyclerView();
-        initAdapter();
+        startRequest();
     }
 
     private void initTipViewManager() {
@@ -70,77 +51,32 @@ public class ${activityClass} extends MMHBaseActivity implements ${contractClass
         tipViewManager.setOnTipViewClickListener(new OnTipViewClickListener() {
             @Override
             public void onClickListener(int tipConfig) {
-                page = 1;
                 startRequest();
             }
         });
-    }
-
-    private void initRecyclerView() {
-        pullRecycleView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        pullRecycleView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<XRecyclerView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<XRecyclerView> refreshView) {
-                page = 1;
-                startRequest();
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<XRecyclerView> refreshView) {
-
-            }
-        });
-        mRecyclerView = pullRecycleView.getRefreshableView();
-        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-
-            @Override
-            public void onLoadMore() {
-                page++;
-                startRequest();
-            }
-        });
-    }
-
-    private void initAdapter() {
-        mAdapter = new ${adapterClass}(this);
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void startRequest() {
-        if (presenter == null) {
-            return;
-        }
         ProgressBarUtils.showProgressBar(this);
         //start request
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("page", String.valueOf(page));
         presenter.mainRequest(paramMap);
     }
 
     @Override
-    public void mainResponse(List<${beanClass}> response) {
+    public void mainResponse(${beanClass} response) {
         ProgressBarUtils.hideProgressBar(this);
         if (tipViewManager != null) {
             tipViewManager.hideTipView();
         }
-        if (mAdapter == null || response == null) {
+        if (response == null) {
             if (tipViewManager != null) {
                 tipViewManager.showTipView(ITipViewConfig.INetRrrorConfig.NET_ERROR_CONFIG);
             }
             return;
         }
-        if (dataList == null) {
-            dataList = new ArrayList<>();
-        }
-        if (page == 1) {
-            dataList.clear();
-        }
-        dataList.addAll(response);
-        mAdapter.updateData(dataList);
+        //
+
     }
 
     @Override
@@ -172,5 +108,4 @@ public class ${activityClass} extends MMHBaseActivity implements ${contractClass
     public boolean isAdded() {
         return false;
     }
-    
 }

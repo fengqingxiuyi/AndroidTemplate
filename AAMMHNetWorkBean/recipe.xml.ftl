@@ -7,6 +7,9 @@
     <instantiate from="src/app_package/activity.java.ftl"
       to="${escapeXmlAttribute(srcOut)}/${activityClass}.java" />
 
+    <instantiate from="src/app_package/bean.java.ftl"
+      to="${escapeXmlAttribute(srcOut)}/request/bean/${beanClass}.java" />
+
     <instantiate from="src/app_package/api.java.ftl"
       to="${escapeXmlAttribute(srcOut)}/request/api/${apiClass}.java" />
 
