@@ -1,7 +1,8 @@
-package ${packageName}.contract;
+package ${packageName}.request.contract;
 
 import com.mmh.base_library.base.presenter.ScopedPresenter;
 import com.mmh.base_library.base.view.BaseView;
+import com.mmh.base_library.network.entity.NetBean;
 import com.mmh.base_library.network.exception.ErrorBean;
 
 import java.util.Map;
@@ -14,20 +15,20 @@ public interface ${contractClass} {
     /**
      * View
      */
-    interface View extends BaseView<${contractClass}.Presenter> {
+    interface View extends BaseView<Presenter> {
 
-        void testResponse();
+        void mainResponse(NetBean netBean);
 
-        void testError(ErrorBean errorBean);
+        void error(ErrorBean errorBean);
 
     }
 
     /***
      * 逻辑层 操作 接口
      */
-    interface Presenter extends ScopedPresenter<${contractClass}.View> {
+    interface Presenter extends ScopedPresenter<View> {
 
-        void testRequest(Map<String, String> pramMap);
+        void mainRequest(Map<String, String> pramMap);
 
     }
 

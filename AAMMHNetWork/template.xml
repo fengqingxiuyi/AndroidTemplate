@@ -33,15 +33,6 @@
         default="cn.atmobi.mamhao" />
 
     <parameter
-        id="beanClass"
-        name="Bean Name"
-        type="string"
-        constraints="class|nonempty|unique"
-        default="TestBean"
-        suggest="${underscoreToCamelCase(classToResource(activityClass))}Bean"
-        help="The name of the Bean to create" />
-
-    <parameter
         id="apiClass"
         name="Api Name"
         type="string"
@@ -76,8 +67,7 @@
         default="TestTag"
         suggest="${underscoreToCamelCase(classToResource(activityClass))}Tag"
         help="The name of the Tag to create" />
-
-    <globals file="globals.xml.ftl" />
+        
     <execute file="recipe.xml.ftl" />
 
 </template>

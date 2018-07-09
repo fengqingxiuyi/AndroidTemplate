@@ -1,35 +1,43 @@
 package ${packageName};
 
-import android.os.Bundle;
+import android.text.TextUtils;
 
-import cn.atmobi.mamahao.panda.base.BaseActivity;
-import ${packageName}.contract.${contractClass};
-
+import com.mmh.base_library.base.activity.MMHBaseActivity;
+import com.mmh.base_library.network.entity.NetBean;
 import com.mmh.base_library.network.exception.ErrorBean;
+import com.mmh.base_library.utils.MyToast;
 
-import ${packageName}.presenter.${presenterClass};
-import ${packageName}.tag.${tagClass};
+import cn.atmobi.base_module.utils.ProgressBarUtils;
+import ${packageName}.request.contract.${contractClass};
 
 /**
  * Activity
  */
-public class ${activityClass} extends BaseActivity implements ${contractClass}.View, ${tagClass} {
+public class ${activityClass} extends MMHBaseActivity implements ${contractClass}.View {
 
-    private ${contractClass}.Presenter presenter;
-
-    @Override
-    protected void onInitView(Bundle arg0) {
-        new ${presenterClass}().bind(activity, this);
-    }
+    ${contractClass}.Presenter presenter;
 
     @Override
-    public void testResponse() {
+    protected void initView() {
 
     }
 
     @Override
-    public void testError(ErrorBean errorBean) {
+    protected void initData() {
 
+    }
+
+    @Override
+    public void mainResponse(NetBean netBean) {
+
+    }
+
+    @Override
+    public void error(ErrorBean errorBean) {
+        ProgressBarUtils.hideProgressBar(this);
+        if (errorBean != null && !TextUtils.isEmpty(errorBean.getError())) {
+            MyToast.showToast(errorBean.getError());
+        }
     }
 
     @Override
@@ -41,5 +49,5 @@ public class ${activityClass} extends BaseActivity implements ${contractClass}.V
     public boolean isAdded() {
         return false;
     }
-
+    
 }
