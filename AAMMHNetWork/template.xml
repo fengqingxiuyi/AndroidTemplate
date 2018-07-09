@@ -19,6 +19,15 @@
         help="The name of the activity class to create" />
 
     <parameter
+        id="layoutName"
+        name="Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${classToResource(activityClass)}_activity"
+        default="test_activity"
+        help="The name of the layout to create for the activity" />
+
+    <parameter
         id="isLauncher"
         name="Launcher Activity"
         type="boolean"

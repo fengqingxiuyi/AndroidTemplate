@@ -8,7 +8,9 @@ import com.mmh.base_library.network.exception.ErrorBean;
 import com.mmh.base_library.utils.MyToast;
 
 import cn.atmobi.base_module.utils.ProgressBarUtils;
+import cn.atmobi.mamhao.R;
 import ${packageName}.request.contract.${contractClass};
+import ${packageName}.request.presenter.${presenterClass};
 
 /**
  * Activity
@@ -19,11 +21,13 @@ public class ${activityClass} extends MMHBaseActivity implements ${contractClass
 
     @Override
     protected void initView() {
+        setContentView(R.layout.${layoutName});
 
     }
 
     @Override
     protected void initData() {
+        new ${presenterClass}().bind(this, this);
 
     }
 
