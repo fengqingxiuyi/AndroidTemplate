@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<template
+    format="1"
+    revision="1"
+    name="MMH NetWork List"
+    minApi="7"
+    minBuildApi="14"
+    description="Creates a new MMH NetWork List FrameWork">
+
+    <category value="AAMMHNetWork" />
+    <formfactor value="Mobile" />
+
+    <parameter
+        id="activityClass"
+        name="Activity Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="TestActivity"
+        help="The name of the Activity class to create" />
+
+    <parameter
+        id="layoutName"
+        name="Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${classToResource(activityClass)}_activity"
+        default="test_activity"
+        help="The name of the Layout to create for the activity" />
+
+    <parameter
+        id="packageName"
+        name="Package Name"
+        type="string"
+        constraints="package"
+        default="cn.atmobi.mamhao" />
+
+    <parameter
+        id="adapterClass"
+        name="Adapter Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="TestAdapter"
+        help="The name of the Adapter class to create" />
+
+    <parameter
+        id="adapterLayoutName"
+        name="Adapter Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${classToResource(activityClass)}_adapter"
+        default="test_adapter"
+        help="The name of the Layout to create for the adapter" />
+
+    <parameter
+        id="beanClass"
+        name="Bean Name"
+        type="string"
+        constraints="class|nonempty|unique"
+        default="TestBean"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}Bean"
+        help="The name of the Bean to create" />
+
+    <parameter
+        id="apiClass"
+        name="Api Name"
+        type="string"
+        constraints="class|nonempty|unique"
+        default="TestApi"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}Api"
+        help="The name of the Api to create" />
+
+    <parameter
+        id="contractClass"
+        name="Contract Name"
+        type="string"
+        constraints="class|nonempty|unique"
+        default="TestContract"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}Contract"
+        help="The name of the Contract to create" />
+
+    <parameter
+        id="presenterClass"
+        name="Presenter Name"
+        type="string"
+        constraints="class|nonempty|unique"
+        default="TestPresenter"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}Presenter"
+        help="The name of the Presenter to create" />
+
+    <parameter
+        id="tagClass"
+        name="Tag Name"
+        type="string"
+        constraints="class|nonempty|unique"
+        default="TestTag"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}Tag"
+        help="The name of the Tag to create" />
+        
+    <execute file="recipe.xml.ftl" />
+
+</template>
